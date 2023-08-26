@@ -1,11 +1,17 @@
 import React, { useState, useEffect, useCallback } from "react";
 
+import PropTypes from 'prop-types';
+
+// Lodash
+import _noop from 'lodash/noop';
+
 // Utils
 import toaster from "react-hot-toast";
 
 // Constants
 import { DEFAULT_REFRESH_INTERVAL } from "./refreshStocks.constants";
 import { KEYS } from "../autoComplete/autoComplete.constants";
+import { EMPTY_ARRAY } from "../../constants/general.constants";
 
 // Helpers
 import {
@@ -84,6 +90,18 @@ const RefreshStocks = ({
       )} second(s)!`}</div>
     </div>
   );
+};
+
+RefreshStocks.propTypes = {
+  setSelectedStocks: PropTypes.func,
+  selectedStocks: PropTypes.array,
+  setStockOverviewLoading: PropTypes.func,
+};
+
+RefreshStocks.defaultProps = {
+  setSelectedStocks: _noop,
+  selectedStocks: EMPTY_ARRAY,
+  setStockOverviewLoading: _noop,
 };
 
 export default RefreshStocks;

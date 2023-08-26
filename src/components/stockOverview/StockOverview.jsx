@@ -1,5 +1,10 @@
 import React, { useMemo } from "react";
 
+import PropTypes from "prop-types";
+
+// Lodash
+import _noop from 'lodash/noop';
+
 // Utils
 import cx from "classnames";
 
@@ -8,6 +13,7 @@ import {
   STOCK_OVERVIEW_CONFIG,
   GRAPH_OPTIONS,
 } from "./stockOverview.constants";
+import { EMPTY_OBJECT } from "../../constants/general.constants";
 
 // Styles
 import styles from "./stockOverview.module.scss";
@@ -18,7 +24,7 @@ import StockDataReader from "../../readers/StockData";
 
 // Components
 import { Line } from "react-chartjs-2";
-import { Chart, registerables } from 'chart.js';
+import { Chart, registerables } from "chart.js";
 import Loader from "../loader";
 
 // Images
@@ -53,6 +59,7 @@ const StockOverview = ({
     handleRemoveStockFromSelectedStocks(OverviewReader.symbol(overviewData));
     deleteCurrentCarouselItem();
   };
+
   return (
     <div
       key={OverviewReader.symbol(overviewData)}
@@ -77,6 +84,20 @@ const StockOverview = ({
       )}
     </div>
   );
+};
+
+StockOverview.propTypes = {
+  data: PropTypes.object,
+  handleRemoveStockFromSelectedStocks: PropTypes.func,
+  deleteCurrentCarouselItem: PropTypes.func,
+  isStockOverviewLoading: PropTypes.bool,
+};
+
+StockOverview.defaultProps = {
+  data: EMPTY_OBJECT,
+  handleRemoveStockFromSelectedStocks: _noop,
+  deleteCurrentCarouselItem: _noop,
+  isStockOverviewLoading: false,
 };
 
 export default StockOverview;

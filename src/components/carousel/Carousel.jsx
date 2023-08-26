@@ -1,4 +1,5 @@
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useState, memo } from "react";
+import PropTypes from "prop-types";
 
 // Styles
 import styles from "./carousel.module.scss";
@@ -6,6 +7,10 @@ import styles from "./carousel.module.scss";
 // Images
 import leftIcon from "./assets/images/left-icon.svg";
 import rightIcon from "./assets/images/right-icon.svg";
+import useCarouselHandlers from "./hooks/useCarouselHandlers";
+
+// Constants
+import { EMPTY_ARRAY, EMPTY_OBJECT } from "../../constants/general.constants";
 
 const Carousel = ({
   data,
@@ -15,23 +20,11 @@ const Carousel = ({
 }) => {
   const [currentItemIdx, setItemIdx] = useState(0);
 
-  // Used to go to the latest item when it is added
-  useEffect(() => setItemIdx(data.length - 1), [data]);
-
-  const goToPreviousComponent = useCallback(
-    () =>
-      setItemIdx(currentItemIdx === 0 ? data.length - 1 : currentItemIdx - 1),
-    [currentItemIdx, data]
-  );
-  const goToNextComponent = useCallback(
-    () =>
-      setItemIdx(currentItemIdx === data.length - 1 ? 0 : currentItemIdx + 1),
-    [currentItemIdx, data]
-  );
-  const deleteCurrentCarouselItem = useCallback(
-    () => currentItemIdx > 0 && goToPreviousComponent(),
-    [goToPreviousComponent, currentItemIdx]
-  );
+  const {
+    goToPreviousComponent,
+    goToNextComponent,
+    deleteCurrentCarouselItem,
+  } = useCarouselHandlers({ setItemIdx, data, currentItemIdx });
 
   return (
     <div className={styles.carouselContainer}>
@@ -78,4 +71,18 @@ const Carousel = ({
   );
 };
 
-export default Carousel;
+Carousel.propTypes = {
+  data: PropTypes.array,
+  component: PropTypes.elementType,
+  componentProps: PropTypes.object,
+  isCarouselLoading: PropTypes.bool,
+};
+
+Carousel.defaultProps = {
+  data: EMPTY_ARRAY,
+  component: null,
+  componentProps: EMPTY_OBJECT,
+  isCarouselLoading: false,
+};
+
+export default memo(Carousel);

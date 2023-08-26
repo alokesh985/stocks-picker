@@ -1,6 +1,3 @@
-// Utils
-import toaster from "react-hot-toast";
-
 // Services
 import { fetchOverview, fetchDailyTimeSeries } from "./stockPicker.services";
 
@@ -15,11 +12,6 @@ export const getSuggestions = (apiResponse) => {
     return bestMatches.map((match) => SymbolSearchReader.symbol(match));
   }
   return [];
-};
-
-export const handleFailure = (err) => {
-  console.error(err);
-  toaster.error("Some error occurred. Please try again");
 };
 
 export const getFilteredSuggestions = (stockData, stockSuggestions) => {
