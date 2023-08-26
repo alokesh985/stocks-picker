@@ -19,7 +19,6 @@ const createFetchStockDataPromise = (stock) => {
 };
 
 export const fetchAllStockData = (stocks) => {
-  console.log({ stocks });
   const stocksPromises = stocks.map(createFetchStockDataPromise);
   // Making parallel API calls
   return Promise.all(stocksPromises);
