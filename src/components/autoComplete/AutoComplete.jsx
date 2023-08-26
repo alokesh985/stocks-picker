@@ -1,9 +1,16 @@
-import React, { useCallback, useState } from "react";
-import cx from "classnames";
-import PropTypes from "prop-types";
+import React, { useCallback } from "react";
+
+// Styles
 import styles from "./autoComplete.module.scss";
 
+// Constants
 import { KEYS } from "./autoComplete.constants";
+
+// Components
+import SuggestionsDropdown from "./components/suggestionsDropdown";
+
+// Images
+import searchIcon from "./assets/images/search-icon.svg";
 
 const Autocomplete = ({
   userInput,
@@ -12,64 +19,69 @@ const Autocomplete = ({
   suggestions,
   shouldShowSuggestions,
   placeholderText,
+  setShouldShowSuggestions,
+  isAutoSuggestLoading,
 }) => {
-  const [currentSuggestionIdx, setCurrentSuggestionIdx] = useState(0);
-
-  const onKeyDown = useCallback((e) => {
-    if (e.keyCode === KEYS.ENTER) {
-      handleSuggestionSelect(suggestions[currentSuggestionIdx]);
-    } else if (e.keyCode === KEYS.UP_ARROW) {
-      if (currentSuggestionIdx === 0) {
-        return;
+  const onKeyDown = useCallback(
+    (e) => {
+      if (e.keyCode === KEYS.ENTER) {
+        handleSuggestionSelect(userInput);
       }
-      setCurrentSuggestionIdx((suggestion) => suggestion - 1);
-    } else if (e.keyCode === KEYS.DOWN_ARROW) {
-      if (currentSuggestionIdx === suggestions.length - 1) {
-        return;
-      }
-      setCurrentSuggestionIdx((suggestion) => suggestion + 1);
+    },
+    [handleSuggestionSelect, userInput]
+  );
+
+  const handleSuggestionClick = useCallback(
+    (e) => handleSuggestionSelect(e.currentTarget.innerText),
+    [handleSuggestionSelect]
+  );
+
+  const showSuggestions = useCallback(() => {
+    if (userInput) {
+      setShouldShowSuggestions(true);
     }
-  }, [currentSuggestionIdx, suggestions, handleSuggestionSelect]);
+  }, [setShouldShowSuggestions, userInput]);
+  const hideSuggestions = useCallback(
+    // Setting a timeout because we don't want to close the dropdown immediately, in case we click on some suggestion
+    () => setTimeout(() => setShouldShowSuggestions(false), 100),
+    [setShouldShowSuggestions]
+  );
 
-  const handleSuggestionClick = useCallback((e) => handleSuggestionSelect(e.currentTarget.innerText), [handleSuggestionSelect]);
-
-  let suggestionsListComponent;
-
-  if (shouldShowSuggestions) {
-    if (suggestions.length) {
-      suggestionsListComponent = (
-        <ul className={styles.suggestions}>
-          {suggestions.map((suggestion, index) => {
-            return (
-              <li
-                className={cx({
-                  [styles.suggestionActive]: index === currentSuggestionIdx,
-                })}
-                key={suggestion}
-                onClick={handleSuggestionClick}
-              >
-                {suggestion}
-              </li>
-            );
-          })}
-        </ul>
-      );
-    } else {
-      suggestionsListComponent = <ul className={styles.suggestions}><li>No results found</li></ul>
-    }
-  }
+  const handleSearchButtonClicked = useCallback(() => {
+    handleSuggestionSelect(userInput);
+  }, [handleSuggestionSelect, userInput]);
 
   return (
-    <>
-      <input
-        type="text"
-        onChange={handleChange}
-        onKeyDown={onKeyDown}
-        value={userInput}
-        placeholder={placeholderText}
-      />
-      {suggestionsListComponent}
-    </>
+    <div className={styles.autoCompleteContainer}>
+      <div className={styles.searchContainer}>
+        <input
+          type="text"
+          onChange={handleChange}
+          onKeyDown={onKeyDown}
+          value={userInput}
+          placeholder={placeholderText}
+          onBlur={hideSuggestions}
+          onFocus={showSuggestions}
+        />
+        <button
+          className={styles.searchButton}
+          onClick={handleSearchButtonClicked}
+        >
+          <img
+            className={styles.searchIcon}
+            src={searchIcon}
+            alt="search-icon"
+          />
+        </button>
+      </div>
+      {shouldShowSuggestions && (
+        <SuggestionsDropdown
+          suggestions={suggestions}
+          handleSuggestionClick={handleSuggestionClick}
+          isAutoSuggestLoading={isAutoSuggestLoading}
+        />
+      )}
+    </div>
   );
 };
 

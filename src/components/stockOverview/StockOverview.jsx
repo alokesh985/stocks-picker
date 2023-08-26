@@ -1,43 +1,77 @@
-import React from "react";
+import React, { useMemo } from "react";
+import cx from "classnames";
 
-// constants
-import { STOCK_OVERVIEW_CONFIG } from "./stockOverview.constants";
+// Constants
+import {
+  STOCK_OVERVIEW_CONFIG,
+  GRAPH_OPTIONS,
+} from "./stockOverview.constants";
 
-// styles
-import styles from './stockOverview.module.scss';
+// Styles
+import styles from "./stockOverview.module.scss";
 
-// readers
+// Readers
 import OverviewReader from "../../readers/Overview";
+import StockDataReader from "../../readers/StockData";
+
+// Components
+import { Line } from "react-chartjs-2";
+import { Chart, registerables } from 'chart.js';
+import Loader from "../loader";
+
+// Images
+import deleteIcon from "./assets/images/delete-icon.svg";
+
+// Helpers
+import { createGraphConfig } from "./stockOverview.helpers";
+
+Chart.register(...registerables);
 
 const renderOverviewField = (stock) => (field) => {
   const { label, accessor } = field;
   const value = accessor(stock);
   return (
-    <div key={value}>
-      <div>{label}</div>
-      <div>{value}</div>
+    <div className={styles.overviewField} key={value}>
+      <div className={styles.overviewFieldLabel}>{label}</div>
+      <div className={styles.overviewFieldValue}>{value}</div>
     </div>
   );
 };
 
-const renderStockOverview = (handleRemoveStockFromSelectedStocks) => (stock) =>
-  (
-    <div key={OverviewReader.name(stock)} className={styles.overviewContainer}>
-      <button onClick={handleRemoveStockFromSelectedStocks(OverviewReader.symbol(stock))}>
-        Click to delete
-      </button>
-      {STOCK_OVERVIEW_CONFIG.map(renderOverviewField(stock))}
-    </div>
-  );
-
 const StockOverview = ({
-  selectedStocks,
+  data: stock,
   handleRemoveStockFromSelectedStocks,
+  deleteCurrentCarouselItem,
+  isStockOverviewLoading,
 }) => {
+  const overviewData = StockDataReader.stockOverview(stock);
+  const graphData = StockDataReader.dailyTimeSeries(stock);
+  const graphConfig = useMemo(() => createGraphConfig(graphData), [graphData]);
+  const handleDelete = () => {
+    handleRemoveStockFromSelectedStocks(OverviewReader.symbol(overviewData));
+    deleteCurrentCarouselItem();
+  };
   return (
-    <div>
-      {selectedStocks.map(
-        renderStockOverview(handleRemoveStockFromSelectedStocks)
+    <div
+      key={OverviewReader.symbol(overviewData)}
+      className={`${styles.overviewContainer} ${cx({
+        [styles.loadingContainer]: isStockOverviewLoading,
+      })}`}
+    >
+      {isStockOverviewLoading ? (
+        <Loader />
+      ) : (
+        <>
+          <button onClick={handleDelete} className={styles.deleteButton}>
+            <img
+              src={deleteIcon}
+              alt="delete-icon"
+              className={styles.deleteIcon}
+            />
+          </button>
+          {STOCK_OVERVIEW_CONFIG.map(renderOverviewField(overviewData))}
+          {graphConfig && <Line data={graphConfig} options={GRAPH_OPTIONS} />}
+        </>
       )}
     </div>
   );

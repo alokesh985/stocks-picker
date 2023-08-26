@@ -1,0 +1,17 @@
+.navigationButton {
+  background: none;
+  border: none;
+  height: 2rem;
+  &:hover {
+    cursor: pointer;
+  }
+  .navigationIcon {
+    height: 2rem;
+    width: 2rem;
+  }
+}
+
+.carouselContainer {
+  display: flex;
+  align-items: center;
+}

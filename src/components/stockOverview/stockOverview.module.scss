@@ -1,4 +1,42 @@
 .overviewContainer {
-  border: 1px solid black;
+  border: 1px solid #AED0FF;
   border-radius: 0.5rem;
+  padding: 1rem;
+  margin: auto;
+  width: 60%;
+}
+
+.overviewField {
+  display: flex;
+  width: 100%;
+  padding-bottom: 2rem;
+  .overviewFieldLabel {
+    width: 20%;
+    font-weight: bold;
+  }
+  .overviewFieldValue {
+    width: 80%;
+  }
+}
+
+.deleteButton {
+  background: none;
+  border: none;
+  display: flex;
+  margin-left: auto;
+  &:hover {
+    cursor: pointer;
+  }
+  .deleteIcon {
+    height: 1.5rem;
+    width: 1.5rem;
+  }
+}
+
+.loadingContainer {
+  width: 45rem;
+  height: 30rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

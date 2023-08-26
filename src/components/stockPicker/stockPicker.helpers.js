@@ -1,3 +1,9 @@
+// utils
+import toaster from "react-hot-toast";
+
+// Services
+import { fetchOverview, fetchDailyTimeSeries } from "./stockPicker.services";
+
 // Readers
 import SymbolSearchReader from "../../readers/SymbolSearch";
 import OverviewReader from "../../readers/Overview";
@@ -11,29 +17,20 @@ export const getSuggestions = (apiResponse) => {
   return [];
 };
 
-export const getStockOverview = (apiResponse) => {
-  const { data } = apiResponse;
-  console.log({ data });
-  return data;
-  // const name = OverviewReader.name(data);
-  // const symbol = OverviewReader.symbol(data);
-  // const currentPrice = OverviewReader.currentPrice(data);
-  // const exchange = OverviewReader.exchange(data);
-  // const industry = OverviewReader.industry(data);
-  // const peRatio = OverviewReader.peRatio(data);
-  // const marketCap = OverviewReader.marketCap(data);
-
-  // return {
-  //   name,
-  //   symbol,
-  //   currentPrice,
-  //   exchange,
-  //   industry,
-  //   peRatio,
-  //   marketCap,
-  // };
+export const handleFailure = (err) => {
+  console.error(err);
+  toaster.error("Some error occurred. Please try again");
 };
 
-export const handleFailure = (err) => {
-  console.log(err);
+export const getFilteredSuggestions = (stockData, stockSuggestions) => {
+  const { stockOverview } = stockData;
+  return stockSuggestions.filter(
+    (suggestion) => suggestion !== OverviewReader.symbol(stockOverview)
+  );
+};
+
+export const getOverviewAndGraphDetailsPromises = (symbol) => {
+  const getOverviewPromise = fetchOverview(symbol);
+  const getDailyTimeSeriesPromise = fetchDailyTimeSeries(symbol);
+  return Promise.all([getOverviewPromise, getDailyTimeSeriesPromise]);
 };
