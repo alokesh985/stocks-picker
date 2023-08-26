@@ -1,0 +1,37 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Testing the Carousel component Should match snapshot 1`] = `
+<div
+  className="carouselContainer"
+>
+  <button
+    className="navigationButton"
+    onClick={[Function]}
+  >
+    <img
+      alt="left-icon"
+      className="navigationIcon"
+      src="left-icon.svg"
+    />
+  </button>
+  <div
+    className="overviewContainer loadingContainer"
+  >
+    <img
+      alt="loader"
+      className="loader "
+      src="loader.svg"
+    />
+  </div>
+  <button
+    className="navigationButton"
+    onClick={[Function]}
+  >
+    <img
+      alt="right-icon"
+      className="navigationIcon"
+      src="right-icon.svg"
+    />
+  </button>
+</div>
+`;

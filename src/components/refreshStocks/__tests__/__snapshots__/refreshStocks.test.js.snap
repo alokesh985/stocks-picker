@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Testing the RefreshStocks component Should match snapshot 1`] = `
+<div
+  className="refreshStocksContainer"
+>
+  <div
+    className="refreshInputContainer"
+  >
+    <div
+      className="refreshAfterLabel"
+    >
+      Refresh After (seconds):
+       
+    </div>
+    <input
+      onKeyDown={[Function]}
+      placeholder="Enter time in seconds and press Enter"
+      type="text"
+    />
+  </div>
+  <div
+    className="refreshingAfterMessage"
+  >
+    Refreshing every 60 second(s)!
+  </div>
+</div>
+`;

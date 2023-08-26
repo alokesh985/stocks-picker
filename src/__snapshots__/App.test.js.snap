@@ -1,0 +1,67 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Should match snapshot 1`] = `
+<div>
+  <div
+    className="appContainer"
+  >
+    <h1
+      className="header"
+    >
+      Stock Picker
+    </h1>
+    <div
+      className="autoCompleteContainer"
+    >
+      <div
+        className="searchContainer"
+      >
+        <input
+          onBlur={[Function]}
+          onChange={[Function]}
+          onFocus={[Function]}
+          onKeyDown={[Function]}
+          placeholder="Enter stock name here"
+          type="text"
+          value=""
+        />
+        <button
+          className="searchButton"
+          onClick={[Function]}
+        >
+          <img
+            alt="search-icon"
+            className="searchIcon"
+            src="search-icon.svg"
+          />
+        </button>
+      </div>
+    </div>
+    <div
+      className="container"
+    >
+      <h2>
+        No Stocks Selected!
+      </h2>
+      <h2>
+        Please search for a stock on the search bar above
+      </h2>
+    </div>
+    <div
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
+      style={
+        Object {
+          "bottom": 16,
+          "left": 16,
+          "pointerEvents": "none",
+          "position": "fixed",
+          "right": 16,
+          "top": 16,
+          "zIndex": 9999,
+        }
+      }
+    />
+  </div>
+</div>
+`;

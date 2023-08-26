@@ -1,0 +1,118 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Testing the StockOverview component Should match snapshot 1`] = `
+<div
+  className="overviewContainer "
+>
+  <button
+    className="deleteButton"
+    onClick={[Function]}
+  >
+    <img
+      alt="delete-icon"
+      className="deleteIcon"
+      src="delete-icon.svg"
+    />
+  </button>
+  <div
+    className="overviewField"
+  >
+    <div
+      className="overviewFieldLabel"
+    >
+      Name
+    </div>
+    <div
+      className="overviewFieldValue"
+    />
+  </div>
+  <div
+    className="overviewField"
+  >
+    <div
+      className="overviewFieldLabel"
+    >
+      Symbol
+    </div>
+    <div
+      className="overviewFieldValue"
+    />
+  </div>
+  <div
+    className="overviewField"
+  >
+    <div
+      className="overviewFieldLabel"
+    >
+      Description
+    </div>
+    <div
+      className="overviewFieldValue"
+    />
+  </div>
+  <div
+    className="overviewField"
+  >
+    <div
+      className="overviewFieldLabel"
+    >
+      Current Price
+    </div>
+    <div
+      className="overviewFieldValue"
+    >
+      $NaN
+    </div>
+  </div>
+  <div
+    className="overviewField"
+  >
+    <div
+      className="overviewFieldLabel"
+    >
+      Exchange
+    </div>
+    <div
+      className="overviewFieldValue"
+    />
+  </div>
+  <div
+    className="overviewField"
+  >
+    <div
+      className="overviewFieldLabel"
+    >
+      Industry
+    </div>
+    <div
+      className="overviewFieldValue"
+    />
+  </div>
+  <div
+    className="overviewField"
+  >
+    <div
+      className="overviewFieldLabel"
+    >
+      PE Ratio
+    </div>
+    <div
+      className="overviewFieldValue"
+    />
+  </div>
+  <div
+    className="overviewField"
+  >
+    <div
+      className="overviewFieldLabel"
+    >
+      Market Cap
+    </div>
+    <div
+      className="overviewFieldValue"
+    >
+      $NaN
+    </div>
+  </div>
+</div>
+`;

@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Testing the NoStocksSelected component Should match snapshot 1`] = `
+<div
+  className="container"
+>
+  <h2>
+    No Stocks Selected!
+  </h2>
+  <h2>
+    Please search for a stock on the search bar above
+  </h2>
+</div>
+`;

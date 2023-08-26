@@ -1,0 +1,50 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Testing the AutoComplete component Should match snapshot 1`] = `
+<div
+  className="autoCompleteContainer"
+>
+  <div
+    className="searchContainer"
+  >
+    <input
+      onBlur={[Function]}
+      onChange={[Function]}
+      onFocus={[Function]}
+      onKeyDown={[Function]}
+      placeholder="Test placeholder text"
+      type="text"
+      value=""
+    />
+    <button
+      className="searchButton"
+      onClick={[Function]}
+    >
+      <img
+        alt="search-icon"
+        className="searchIcon"
+        src="search-icon.svg"
+      />
+    </button>
+  </div>
+  <ul
+    className="suggestions"
+  >
+    <li
+      onClick={[Function]}
+    >
+      IBM
+    </li>
+    <li
+      onClick={[Function]}
+    >
+      MSFT
+    </li>
+    <li
+      onClick={[Function]}
+    >
+      INTU
+    </li>
+  </ul>
+</div>
+`;

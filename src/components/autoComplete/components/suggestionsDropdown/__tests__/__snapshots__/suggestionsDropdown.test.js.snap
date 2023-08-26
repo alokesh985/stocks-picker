@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Testing the SuggestionDropdown component Should match snapshot 1`] = `
+<ul
+  className="suggestions"
+>
+  <li
+    onClick={[Function]}
+  >
+    IBM
+  </li>
+  <li
+    onClick={[Function]}
+  >
+    MSFT
+  </li>
+  <li
+    onClick={[Function]}
+  >
+    INTU
+  </li>
+</ul>
+`;
