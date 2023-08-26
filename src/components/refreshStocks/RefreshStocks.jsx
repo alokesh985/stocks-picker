@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from "react";
 
-// utils
+// Utils
 import toaster from "react-hot-toast";
 
 // Constants

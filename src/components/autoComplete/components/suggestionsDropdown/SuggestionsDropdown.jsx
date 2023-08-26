@@ -1,6 +1,6 @@
 import React from "react";
 
-// styles
+// Styles
 import styles from "./suggestionsDropdown.module.scss";
 import Loader from "../../../loader";
 

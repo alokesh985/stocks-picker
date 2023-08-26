@@ -1,4 +1,4 @@
-// utils
+// Utils
 import toaster from "react-hot-toast";
 
 // Services

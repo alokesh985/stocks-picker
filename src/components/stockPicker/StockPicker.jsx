@@ -1,11 +1,11 @@
 import React, { useEffect, useState, useCallback } from "react";
 
-// lodash
+// Lodash
 import _debounce from "lodash/debounce";
 import _isEmpty from "lodash/isEmpty";
 import _some from "lodash/some";
 
-// utils
+// Utils
 import toaster from "react-hot-toast";
 
 // Services

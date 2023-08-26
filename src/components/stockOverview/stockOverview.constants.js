@@ -1,4 +1,11 @@
+// Utils
+import { compose} from 'recompose';
+
+// Readers
 import OverviewReader from "../../readers/Overview";
+
+// Helpers
+import { USD } from "../../helpers/localisation";
 
 export const STOCK_OVERVIEW_CONFIG = [
   {
@@ -15,7 +22,7 @@ export const STOCK_OVERVIEW_CONFIG = [
   },
   {
     label: "Current Price",
-    accessor: OverviewReader.currentPrice,
+    accessor: compose(USD.format, OverviewReader.currentPrice),
   },
   {
     label: "Exchange",
@@ -31,7 +38,7 @@ export const STOCK_OVERVIEW_CONFIG = [
   },
   {
     label: "Market Cap",
-    accessor: OverviewReader.marketCap,
+    accessor: compose(USD.format, OverviewReader.marketCap),
   },
 ];
 
