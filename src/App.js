@@ -2,11 +2,7 @@
 import StockPicker from "./components/stockPicker";
 
 function App() {
-  return (
-    <div>
-      <StockPicker />
-    </div>
-  );
+  return <StockPicker />;
 }
 
 export default App;
